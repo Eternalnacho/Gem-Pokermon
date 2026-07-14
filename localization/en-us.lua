@@ -81,7 +81,7 @@ return {
                     "{C:attention}Nature: {C:inactive}({C:attention}#4#, #5#, #6#{C:inactive}){}",
                     "Played {C:attention}Nature{} cards earn {C:money}$#1#{}",
                     "when scored plus {C:money}$#1#{} for each other",
-                    "{X:grass,C:white}Grass{} or {X:dragon,C:white}Dragon{} card you have",
+                    "{X:poke_grass,C:white}Grass{} or {X:poke_dragon,C:white}Dragon{} card you have",
                     "{C:inactive,s:0.8}(includes Jokers and Energy cards){}",
                     "{C:inactive}(Currently {C:money}$#3#{C:inactive} total){}"
                 }
@@ -91,7 +91,7 @@ return {
                 text = {
                     "{C:attention}Nature: {C:inactive}({C:attention}#4#, #5#, #6#{C:inactive}){}",
                     "Played {C:attention}Nature{} cards give {X:mult,C:white}X#2#{} Mult for",
-                    "each {X:fire,C:white}Fire{} or {X:earth,C:white}Fighting{} joker you have",
+                    "each {X:poke_fire,C:white}Fire{} or {X:poke_earth,C:white}Fighting{} joker you have",
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult){}",
                 }
             },
@@ -103,14 +103,14 @@ return {
                     "a {C:green}#4# in #5#{} chance to create a tarot card.",
                     "{br:3}ERROR - CONTACT STEAK",
                     "Increases by {C:chips}+#2#{} and {C:green}1{} for",
-                    "each other {X:water,C:white}Water{} or {X:earth,C:white}Earth{} card",
+                    "each other {X:poke_water,C:white}Water{} or {X:poke_earth,C:white}Earth{} card",
                     "{C:inactive}(Currently {C:chips}+#6#{C:inactive} Chips)",
                 }
             },
             j_poke_cubone_Gem = {
                 name = 'Cubone',
                 text = {
-                    "{C:attention}Holding {C:item}Thick Club{}",
+                    "{C:attention}Holding {C:poke_item}Thick Club{}",
                     "Gives {C:mult}+#1#{} Mult for",
                     "each {C:attention}held{} consumable",
                     "{C:inactive,s:0.8}({C:attention,s:0.8}Thick Clubs{C:inactive,s:0.8} count as double){}",
@@ -133,22 +133,22 @@ return {
                 name = "Pincurchin",
                 text = {
                     "When sold, create a Negative",
-                    "{C:pink}Lightning Energy{} card for each",
-                    "{X:lightning, C:black}Lightning{} Joker you have",
+                    "{C:poke_pink}Lightning Energy{} card for each",
+                    "{X:poke_lightning, C:black}Lightning{} Joker you have",
                 }
             },
             j_Gem_indeedee_f = {
                 name = "Indeedee F",
                 text = {
                     "When sold, create a Negative",
-                    "{C:pink}Psychic Energy{} card for each",
-                    "{X:psychic,C:white}Psychic{} Joker you have",
+                    "{C:poke_pink}Psychic Energy{} card for each",
+                    "{X:poke_psychic,C:white}Psychic{} Joker you have",
                 }
             },
             j_Gem_indeedee_m = {
                 name = "Indeedee M",
                 text = {
-                    "{X:mult,C:white}X#2#{} Mult per {X:psychic,C:white}Psychic{} card",
+                    "{X:mult,C:white}X#2#{} Mult per {X:poke_psychic,C:white}Psychic{} card",
                     "{C:inactive,s:0.8}(includes Jokers and Energy cards){}",
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult){}",
                 }
@@ -289,8 +289,8 @@ return {
                 name = "Alcremie (Love)",
                 text = {
                     "When a {C:blue}Hand{} is played,",
-                    "create an {C:pink}Energy{} card of the",
-                    "same {C:pink}Type{} of leftmost Joker",
+                    "create an {C:poke_pink}Energy{} card of the",
+                    "same {C:poke_pink}Type{} of leftmost Joker",
                     "{C:inactive}(Reverts after {C:attention}#1#{C:inactive} round)",
                 }
             },
@@ -314,7 +314,7 @@ return {
             j_Gem_alcremie_flower = {
                 name = "Alcremie (Flower)",
                 text = {
-                    "Create a {C:item}Item{} card",
+                    "Create a {C:poke_item}Item{} card",
                     "when {C:blue}Hand{} is played",
                     "{C:inactive}(Reverts after {C:attention}#1#{C:inactive} round)",
                 }
@@ -344,7 +344,7 @@ return {
                   "{C:attention}Gold{} cards when scored",
                   "{br:4}ERROR - CONTACT STEAK",
                   "If scoring {C:attention}Nature{} card is already {C:attention}Gold{},",
-                  "give {C:money}$#1#{} plus {C:money}$#2#{} for each other {X:lightning, C:black}Lightning{}",
+                  "give {C:money}$#1#{} plus {C:money}$#2#{} for each other {X:poke_lightning, C:black}Lightning{}",
                   "joker you have when scored",
                 }
             },
@@ -452,10 +452,10 @@ return {
             j_Gem_zeraora = {
                 name = "Zeraora",
                 text = {
-                  "Each {X:lightning,C:black}Lightning{} Joker gives {X:mult,C:white}X#1#{} Mult",
+                  "Each {X:poke_lightning,C:black}Lightning{} Joker gives {X:mult,C:white}X#1#{} Mult",
                   "{br:4}ERROR - CONTACT STEAK",
                   "If {C:attention}all{} of your Jokers are",
-                  "{X:lightning,C:black}Lightning{} type, apply {C:attention}Plasma Deck{}",
+                  "{X:poke_lightning,C:black}Lightning{} type, apply {C:attention}Plasma Deck{}",
                 }
             },
             j_Gem_great_tusk = {
@@ -541,7 +541,7 @@ return {
                 name = "Koraidon",
                 text = {
                   "When defeating a {C:attention}Boss Blind{},",
-                  "create a Fully {C:pink}Energized{}",
+                  "create a Fully {C:poke_pink}Energized{}",
                   "{C:attention}Past Paradox{} Joker",
                 }
             },
@@ -549,7 +549,7 @@ return {
                 name = "Miraidon",
                 text = {
                   "When defeating a {C:attention}Boss Blind{},",
-                  "create a Fully {C:pink}Energized{}",
+                  "create a Fully {C:poke_pink}Energized{}",
                   "{C:attention}Future Paradox{} Joker",
                 }
             },
@@ -701,7 +701,7 @@ return {
                     "Scoring {C:attention}Unenhanced 4s{} are",
                     "turned into {C:attention}Seed{} cards",
                     "{br:4}ERROR - CONTACT STEAK",
-                    "Scoring {C:attention}10{} {C:inactive}[#1#] {C:attention}4s{} applies a {X:grass,C:white}Grass{}",
+                    "Scoring {C:attention}10{} {C:inactive}[#1#] {C:attention}4s{} applies a {X:poke_grass,C:white}Grass{}",
                     "sticker to {C:attention}leftmost{} joker",
                 }
             },
