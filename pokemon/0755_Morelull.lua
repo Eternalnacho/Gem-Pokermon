@@ -91,10 +91,8 @@ local shiinotic = {
       return true end }))
   end,
   remove_from_deck = function(self, card, from_debuff)
-    G.E_MANAGER:add_event(Event({func = function()
-      G.consumeables.config.card_limit = G.consumeables.config.card_limit - card.ability.extra.card_limit
-      return true end }))
-  end, 
+    G.consumeables.config.card_limit = G.consumeables.config.card_limit - card.ability.extra.card_limit
+  end,
 }
 
 
