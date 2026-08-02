@@ -38,7 +38,7 @@ local load_directory, item_loader = assert(SMODS.load_file("src/loader.lua"))()
 load_directory("src/functions")
 
 --Load pokemon files
-load_directory("pokemon", item_loader.load_pokemon, { post_load = item_loader.load_pokemon_family })
+load_directory("pokemon", item_loader.load_pokemon, { pre_load = item_loader.prep_config, post_load = item_loader.load_pokemon_family })
 
 --Load Joker Display if the mod is enabled
 if (SMODS.Mods["JokerDisplay"] or {}).can_load then
@@ -74,6 +74,8 @@ SMODS.Rarity{
       return weight
   end,
 }
+
+pokermon.add_stage("Paradox")
 
 -- Load consumables
 load_directory("consumables", SMODS.Consumable)

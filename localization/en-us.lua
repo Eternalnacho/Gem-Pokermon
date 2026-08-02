@@ -874,11 +874,6 @@ return {
             k_gem_future_paradox = "Paradox",
 
             -- Settings
-            Gem_pokemon1 = "Pokemon 1/4",
-            Gem_pokemon2 = "Pokemon 2/4",
-            Gem_pokemon3 = "Pokemon 3/4",
-            Gem_pokemon4 = "Pokemon 4/4",
-            Gem_miscellaneous = "Miscellaneous",
       },
       labels = {
             k_gem_paradox = "Paradox",

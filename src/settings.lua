@@ -8,7 +8,7 @@ local list_map = function(list, func)
   return new_list
 end
 
-local content = assert(SMODS.load_file("src/settings/contents.lua"))()
+local pages = assert(SMODS.load_file("src/settings/contents.lua"))()
 
 local function create_tile_spacer()
   return { n = G.UIT.B, config = { w = 0.1, h = 3.5 } }
@@ -17,11 +17,11 @@ end
 local function create_tile_grid(args)
   local page_options = {}
 
-  for i, _ in ipairs(content.pages) do
-    page_options[#page_options + 1] = localize('k_page') .. " " .. i .. "/" .. #content.pages
+  for i, _ in ipairs(pages) do
+    page_options[#page_options + 1] = localize('k_page') .. " " .. i .. "/" .. #pages
   end
 
-  local current_page = content.pages[args.page_num]
+  local current_page = pages[args.page_num]
 
   local first_row = { n = G.UIT.R, config = { align = "cm" }, nodes = { create_tile_spacer() } }
   local second_row = { n = G.UIT.R, config = { align = "cm" }, nodes = { create_tile_spacer() } }
