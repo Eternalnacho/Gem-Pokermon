@@ -48,11 +48,11 @@ local espurr={
 local meowstic={
   name = "meowstic",
   pos = {x = 2, y = 8},
-  config = {extra = { scry = 4, mult = 3, money_mod = 1, earned = 0}},
+  config = {extra = { scry = 4, mult = 3, money_mod = 1 } },
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    local extra = card.ability.extra or self.config.extra
     info_queue[#info_queue + 1] = {set = 'Other', key = 'scry_cards'}
-		return {vars = {card.ability.extra.scry, card.ability.extra.mult, card.ability.extra.money_mod, card.ability.extra.earned}}
+		return {vars = { extra.scry, extra.mult, extra.money_mod }}
   end,
   rarity = "poke_safari",
   cost = 8,
@@ -62,42 +62,16 @@ local meowstic={
   gen = 6,
   blueprint_compat = true,
   calculate = function(self, card, context)
-    if not context.end_of_round and context.scoring_hand then
-      if context.individual and context.cardarea == G.poke_scry_view and not context.other_card.debuff then
-        return {
-          message = localize{type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult}},
-          message_card = context.other_card,
-          mult_mod = card.ability.extra.mult,
-          card = card,
-        }
-      end
-    end
-    if context.end_of_round then
-      if context.individual and context.cardarea == G.poke_scry_view and not context.other_card.debuff then
-        if context.other_card.debuff then
-          return {
-            message = localize("k_debuffed"),
-            colour = G.C.RED,
-            card = card,
-          }
-        else
-          local earned = 0
-          if not context.blueprint then
-            card.ability.extra.earned = card.ability.extra.earned + card.ability.extra.money_mod
-          end
-          
-          earned = earned + card.ability.extra.money_mod
-          earned = pokermon.ease_poke_dollars(card, "hands", earned)
-          return {
-              message = localize('$')..earned,
-              colour = G.C.MONEY,
-              card = card
-          }
-        end
+    if context.individual and context.cardarea == G.poke_scry_view then
+      if not context.end_of_round and context.scoring_hand then
+        return { mult = card.ability.extra.mult, card = context.other_card }
+      elseif context.end_of_round then
+        local earned = pokermon.ease_poke_dollars(card, "meowstic", card.ability.extra.money_mod, true)
+        return { dollars = earned, card = context.other_card }
       end
     end
   end,
-   megas = { "mega_meowstic" },
+  megas = { "mega_meowstic" },
   add_to_deck = function(self, card, from_debuff)
     G.GAME.poke_scry_amount = (G.GAME.poke_scry_amount or 0) + card.ability.extra.scry
   end,
@@ -112,9 +86,8 @@ local meowstic_f={
   pos = {x = 4, y = 8},
   config = {extra = {scry = 4, Xmult_multi = 1.25}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
-    info_queue[#info_queue + 1] = {set = 'Other', key = 'scry_cards'}
-		return {vars = {card.ability.extra.scry, card.ability.extra.Xmult_multi}}
+    info_queue[#info_queue + 1] = { set = 'Other', key = 'scry_cards' }
+		return { vars = { card.ability.extra.scry, card.ability.extra.Xmult_multi } }
   end,
   rarity = "poke_safari",
   cost = 8,
@@ -127,10 +100,7 @@ local meowstic_f={
   calculate = function(self, card, context)
     if not context.end_of_round and context.scoring_hand then
       if context.individual and context.cardarea == G.poke_scry_view and not context.other_card.debuff then
-        return {
-          xmult = card.ability.extra.Xmult_multi,
-          card = card,
-        }
+        return { xmult = card.ability.extra.Xmult_multi, card = context.other_card }
       end
     end
   end,
@@ -146,51 +116,28 @@ local meowstic_f={
 -- Mega Meowstic M
 local mega_meowstic={
   name = "mega_meowstic",
-  pos = {x = 2, y = 8},
-  config = {extra = { scry = 6, Xmult_multi = 1.3, money_mod = 1, earned = 0}},
+  config = {extra = { scry = 6, Xmult_multi = 1.3, money_mod = 1}},
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    local extra = card.ability.extra or self.config.extra
     info_queue[#info_queue + 1] = {set = 'Other', key = 'scry_cards'}
-		return {vars = {card.ability.extra.scry, card.ability.extra.Xmult_multi, card.ability.extra.money_mod, card.ability.extra.earned}}
+		return {
+      vars = { extra.scry, extra.Xmult_multi, extra.money_mod },
+      key = 'j_Gem_mega_meowstic'
+    }
   end,
   rarity = "poke_mega",
   cost = 12,
   stage = "Mega",
   ptype = "Psychic",
-  atlas = "AtlasJokersBasicGen06",
   gen = 6,
   blueprint_compat = true,
   calculate = function(self, card, context)
-    if not context.end_of_round and context.scoring_hand then
-      if context.individual and context.cardarea == G.poke_scry_view and not context.other_card.debuff then
-        return {
-          xmult = card.ability.extra.Xmult_multi,
-          card = card,
-        }
-      end
-    end
-    if context.end_of_round then
-      if context.individual and context.cardarea == G.poke_scry_view and not context.other_card.debuff then
-        if context.other_card.debuff then
-          return {
-            message = localize("k_debuffed"),
-            colour = G.C.RED,
-            card = card,
-          }
-        else
-          local earned = 0
-          if not context.blueprint then
-            card.ability.extra.earned = card.ability.extra.earned + card.ability.extra.money_mod
-          end
-          
-          earned = earned + card.ability.extra.money_mod
-          earned = pokermon.ease_poke_dollars(card, "hands", earned)
-          return {
-              message = localize('$')..earned,
-              colour = G.C.MONEY,
-              card = card
-          }
-        end
+    if context.individual and context.cardarea == G.poke_scry_view then
+      if not context.end_of_round and context.scoring_hand then
+        return { xmult = card.ability.extra.Xmult_multi, card = context.other_card }
+      elseif context.end_of_round then
+        local earned = pokermon.ease_poke_dollars(card, "mega_meowstic", card.ability.extra.money_mod, true)
+        return { dollars = earned, card = context.other_card }
       end
     end
   end,
@@ -205,12 +152,16 @@ local mega_meowstic={
 -- Mega Meowstic F
 local mega_meowstic_f={
   name = "mega_meowstic_f",
-  pos = {x = 2, y = 8},
-  config = {extra = { scry = 6, Xmult_multi = 1.3, money_mod = 1, earned = 0}},
+  pos = PokemonSprites["mega_meowstic"].base.pos,
+  soul_pos = PokemonSprites["mega_meowstic"].base.soul_pos,
+  config = { extra = { scry = 6, Xmult_multi = 1.3, money_mod = 1 } },
   loc_vars = function(self, info_queue, card)
-    pokermon.type_tooltip(self, info_queue, card)
+    local extra = card.ability.extra or self.config.extra
     info_queue[#info_queue + 1] = {set = 'Other', key = 'scry_cards'}
-		return {vars = {card.ability.extra.scry, card.ability.extra.Xmult_multi, card.ability.extra.money_mod, card.ability.extra.earned}}
+		return {
+      vars = { extra.scry, extra.Xmult_multi, extra.money_mod },
+      key = 'j_Gem_mega_meowstic'
+    }
   end,
   rarity = "poke_mega",
   cost = 12,
@@ -221,36 +172,12 @@ local mega_meowstic_f={
   no_collection = true,
   blueprint_compat = true,
   calculate = function(self, card, context)
-    if not context.end_of_round and context.scoring_hand then
-      if context.individual and context.cardarea == G.poke_scry_view and not context.other_card.debuff then
-        return {
-          xmult = card.ability.extra.Xmult_multi,
-          card = card,
-        }
-      end
-    end
-    if context.end_of_round then
-      if context.individual and context.cardarea == G.poke_scry_view and not context.other_card.debuff then
-        if context.other_card.debuff then
-          return {
-            message = localize("k_debuffed"),
-            colour = G.C.RED,
-            card = card,
-          }
-        else
-          local earned = 0
-          if not context.blueprint then
-            card.ability.extra.earned = card.ability.extra.earned + card.ability.extra.money_mod
-          end
-          
-          earned = earned + card.ability.extra.money_mod
-          earned = pokermon.ease_poke_dollars(card, "hands", earned)
-          return {
-              message = localize('$')..earned,
-              colour = G.C.MONEY,
-              card = card
-          }
-        end
+    if context.individual and context.cardarea == G.poke_scry_view then
+      if not context.end_of_round and context.scoring_hand then
+        return { xmult = card.ability.extra.Xmult_multi, card = context.other_card }
+      elseif context.end_of_round then
+        local earned = pokermon.ease_poke_dollars(card, "mega_meowstic", card.ability.extra.money_mod, true)
+        return { dollars = earned, card = context.other_card }
       end
     end
   end,
