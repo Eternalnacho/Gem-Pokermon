@@ -73,6 +73,7 @@ local wailord = {
 }
 
 return {
+  can_load = false,
   config_key = "Wailmer",
   list = {wailmer, wailord}
 }
