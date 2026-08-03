@@ -280,5 +280,6 @@ end
 return {
   config_key = "Alcremie",
   init = init,
-  list = list
+  list = list,
+  config_list = { milcery, alcremie }
 }

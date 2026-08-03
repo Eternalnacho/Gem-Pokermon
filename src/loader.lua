@@ -75,8 +75,24 @@ local function load_pokemon_family(file)
   end
 end
 
+local function prep_config(file)
+  GEM.config_list = GEM.config_list or {}
+  if file.list then
+    local list = GEM.utils.map_list((file.config_list or file.list), function(item)
+      local custom_prefix = item.Gem_inject_prefix or "Gem"
+      return 'j_' .. custom_prefix .. '_' .. (item.key or item.name)
+    end)
+    table.insert(GEM.config_list, {
+      list = list,
+      label = file.label,
+      config_key = file.config_key,
+    })
+  end
+end
+
 return load_directory, {
   load_sleeves = load_sleeves,
   load_pokemon = load_pokemon,
   load_pokemon_family = load_pokemon_family,
+  prep_config = prep_config,
 }
